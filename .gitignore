@@ -8,7 +8,7 @@ log/
 latest_log
 go/
 */.DS_Store
-
+vendor
 static/excel
 
 # User-specific stuff
