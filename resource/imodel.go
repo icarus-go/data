@@ -1,4 +1,4 @@
-package data
+package resource
 
 import (
 	"gorm.io/gorm"
