@@ -12,10 +12,10 @@ type (
 	}
 
 	GetByUUID struct {
-		ID string `json:"uuid" form:"uuid" example:"string UUID"` // ID UUID
+		ID string `json:"id" form:"id" example:"string UUID"` // ID UUID
 	}
 
 	GetByUUIDs struct {
-		IDs []string `json:"uuids" form:"uuids" example:"[]string UUIDs"` // IDs UUIDs
+		IDs []string `json:"ids" form:"ids" example:"[]string UUIDs"` // IDs UUIDs
 	}
 )
