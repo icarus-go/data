@@ -9,6 +9,9 @@ import (
 	"strings"
 )
 
+//SnowFlakeID 雪花算法ID
+//  Author: Kevin·CC
+//  Description: 避免后端人员疏忽忘记书写jsontag中的string导致精度丢失的问题,直接重写unmarshal以及marshal方法强行定制规范
 type SnowFlakeID uint64
 
 //NewSnowFlakeID
@@ -66,6 +69,7 @@ func (s *SnowFlakeID) MarshalJSON() ([]byte, error) {
 // Author Kevin·CC
 func (s *SnowFlakeID) UnmarshalJSON(bytes []byte) error {
 	val := string(bytes)
+
 	if val = strings.TrimSpace(val); val == "" {
 		return nil
 	}
