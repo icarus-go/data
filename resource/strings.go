@@ -1,6 +1,7 @@
 package resource
 
 import (
+	"database/sql"
 	"database/sql/driver"
 	"fmt"
 	"pmo-test4.yz-intelligence.com/kit/data/json"
@@ -109,11 +110,13 @@ func (s *Strings) trim() *Strings {
 // Scan 扫描
 // Author Kevin·CC
 func (s *Strings) Scan(value interface{}) error {
-	if val, ok := value.(string); ok {
-		val := strings.ReplaceAll(val, "\"", "")
+	nullString := sql.NullString{}
+	err := nullString.Scan(value)
+	val := nullString.String
+	if val != "" {
 		*s = strings.Split(val, ",")
 	}
-	return nil
+	return err
 }
 
 // Value 值
