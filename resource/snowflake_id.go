@@ -14,18 +14,18 @@ import (
 //  Description: 避免后端人员疏忽忘记书写jsontag中的string导致精度丢失的问题,直接重写unmarshal以及marshal方法强行定制规范
 type SnowFlakeID uint64
 
-//NewSnowFlakeID
+//New
 //  Author: Kevin·CC
 //  Description: 创建雪花算法ID
 //  Return *SnowFlakeID 雪花算法ID
 //  Return error 相同机器上可能会出现ID重复的问题(可能性较低,能明确架构时可以忽略错误)
-func NewSnowFlakeID() (*SnowFlakeID, error) {
+func New() (SnowFlakeID, error) {
 	id, err := snowflake.NewID()
 	if err != nil {
-		return nil, err
+		return 0, err
 	}
 	flakeID := SnowFlakeID(id)
-	return &flakeID, err
+	return flakeID, err
 }
 
 // String
