@@ -55,8 +55,9 @@ func (s *SnowFlakeID) Scan(value interface{}) error {
 
 // Value 值
 // Author Kevin·CC
-func (s *SnowFlakeID) Value() (driver.Value, error) {
-	return driver.Value(s.Uint64()), nil
+func (s SnowFlakeID) Value() (driver.Value, error) {
+	u := s.Uint64()
+	return driver.Value(u), nil
 }
 
 // MarshalJSON 序列化

@@ -121,8 +121,9 @@ func (s *Strings) Scan(value interface{}) error {
 
 // Value 值
 // Author Kevin·CC
-func (s *Strings) Value() (driver.Value, error) {
-	return driver.Value(s.trim().String()), nil
+func (s Strings) Value() (driver.Value, error) {
+	s2 := s.trim().String()
+	return driver.Value(s2), nil
 }
 
 // MarshalJSON 序列化
@@ -136,11 +137,13 @@ func (s *Strings) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON 反序列化
 // Author Kevin·CC
 func (s *Strings) UnmarshalJSON(bytes []byte) error {
-	val := strings.ReplaceAll(string(bytes), "\"", "")
-	val = strings.ReplaceAll(val, "[", "")
-	val = strings.ReplaceAll(val, "]", "")
-	*s = strings.Split(val, ",")
-	return nil
+	//val := strings.ReplaceAll(string(bytes), "\"", "")
+	//val = strings.ReplaceAll(val, "[", "")
+	//val = strings.ReplaceAll(val, "]", "")
+	var temp []string
+	err := json.Unmarshal(bytes, &temp)
+	*s = temp
+	return err
 }
 
 // GormDataType gorm 定义数据库字段类型
