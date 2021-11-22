@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const DateFormat = "2006-01-02"
+const dateFormat = "2006-01-02"
 
 type Date struct {
 	time.Time
@@ -17,7 +17,7 @@ type Date struct {
 // NewDate 构建 Date 方法
 // Author SliverHorn
 func NewDate(value string) *Date {
-	_time, _ := time.Parse(DateFormat, value)
+	_time, _ := time.Parse(dateFormat, value)
 	return &Date{Time: _time}
 }
 
@@ -32,6 +32,71 @@ func NewDateByTime(t time.Time) *Date {
 func NewDateByLayout(layout, value string) *Date {
 	_time, _ := time.Parse(layout, value)
 	return &Date{Time: _time}
+}
+
+//IsThisHour
+//  Author: Kevin·CC
+//  Description: 是当前小时
+//  Return bool
+func (d Date) IsThisHour() bool {
+	if d.IsZero() {
+		return false
+	}
+
+	now := time.Now()
+	if d.Year() == now.Year() && d.Day() == now.Day() && d.Month() == now.Month() && d.Hour() == now.Hour() {
+		return true
+	}
+
+	return false
+}
+
+//IsToday
+//  Author: Kevin·CC
+//  Description:
+//  Return bool
+func (d Date) IsToday() bool {
+	if d.IsZero() {
+		return false
+	}
+
+	now := time.Now()
+	if d.Year() == now.Year() && d.Day() == now.Day() && d.Month() == now.Month() {
+		return true
+	}
+
+	return false
+}
+
+//IsThisMonth
+//  Author: Kevin·CC
+//  Description: 是本月
+//  Return bool
+func (d Date) IsThisMonth() bool {
+	if d.IsZero() {
+		return false
+	}
+
+	now := time.Now()
+	if d.Year() == now.Year() && d.Month() == now.Month() {
+		return true
+	}
+	return false
+}
+
+//IsThisYear
+//  Author: Kevin·CC
+//  Description: 是今年
+//  Return bool
+func (d Date) IsThisYear() bool {
+	if d.IsZero() {
+		return false
+	}
+
+	if d.Year() == time.Now().Year() {
+		return true
+	}
+	return false
 }
 
 // ToDatetime Date to Datetime
@@ -77,7 +142,7 @@ func (d *Date) Scan(value interface{}) error {
 // Value 值
 // Author SliverHorn
 func (d Date) Value() (driver.Value, error) {
-	return driver.Value(d.Time.Format(DateFormat)), nil
+	return driver.Value(d.Time.Format(dateFormat)), nil
 }
 
 // GormDataType gorm 定义数据库字段类型

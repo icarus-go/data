@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const DateTimeFormat = "2006-01-02 15:04:05"
+const dateTimeFormat = "2006-01-02 15:04:05"
 
 type Datetime struct {
 	time.Time
@@ -20,7 +20,7 @@ type Datetime struct {
 //  Param: value
 //  return *Datetime
 func NewDatetime(value string) *Datetime {
-	_time, _ := time.Parse(DateTimeFormat, value)
+	_time, _ := time.Parse(dateTimeFormat, value)
 	return &Datetime{Time: _time}
 }
 
@@ -81,7 +81,7 @@ func (d *Datetime) Scan(value interface{}) error {
 // Value 值
 // Author SliverHorn
 func (d Datetime) Value() (driver.Value, error) {
-	return driver.Value(d.Time.Format(DateTimeFormat)), nil
+	return driver.Value(d.Time.Format(dateTimeFormat)), nil
 }
 
 // MarshalJSON 序列化
