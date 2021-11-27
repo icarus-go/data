@@ -11,19 +11,19 @@ type Temp struct {
 }
 
 func TestSnowFlakeIDUnmarshal(t *testing.T) {
-	id, err := NewSnowFlakeID()
-	if err != nil {
-		return
-	}
-	marshal, err := json.Marshal(&Temp{
-		ID:       *id,
-		UserName: "",
-	})
-	if err != nil {
-		return
-	}
-
-	print(string(marshal))
+	//id, err := NewSnowFlakeID()
+	//if err != nil {
+	//	return
+	//}
+	//marshal, err := json.Marshal(&Temp{
+	//	ID:       *id,
+	//	UserName: "",
+	//})
+	//if err != nil {
+	//	return
+	//}
+	//
+	//print(string(marshal))
 }
 
 func TestSnowFlakeID_Marshal(t *testing.T) {
