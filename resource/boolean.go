@@ -42,12 +42,7 @@ func (b *Boolean) Scan(value interface{}) error {
 // Value 值
 // Author Kevin·CC
 func (b *Boolean) Value() (driver.Value, error) {
-	result := 0
-	if *b {
-		result = 1
-	}
-
-	return driver.Value(result), nil
+	return driver.Value(bool(*b)), nil
 }
 
 // MarshalJSON 序列化
