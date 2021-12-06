@@ -1,11 +1,19 @@
 package params
 
-import "pmo-test4.yz-intelligence.com/kit/data/resource"
+import (
+	"gorm.io/gorm"
+	"pmo-test4.yz-intelligence.com/kit/data/resource"
+)
+
+//IWhere
+//  Author: Kevin·CC
+//  Description: 条件
+type IWhere interface {
+	Scopes(name ...string) func(tx *gorm.DB) *gorm.DB
+}
 
 type (
 	GetByID struct {
-		// 2021-11-13 13:53:08 ps: 其实本意上是想使用雪花算法的
-		// 无奈外包产品,有可能一台机器上多台MachineID(计算方式),所以放弃了,使用了 `auto_increment`
 		ID uint64 `json:"id" validate:"required" form:"id" swaggertype:"string" example:"uint64 主键ID"` // 主键ID
 	}
 
@@ -31,3 +39,51 @@ type (
 		IDs []string `json:"ids" form:"ids" validate:"required" example:"[]string UUIDs"` // IDs UUIDs
 	}
 )
+
+func (g GetByID) Scopes(name ...string) func(tx *gorm.DB) *gorm.DB {
+	return func(tx *gorm.DB) *gorm.DB {
+		return tx.Where(idWhere(name...)+" = ?", g.ID)
+	}
+}
+
+func (g GetBySnowFlakeID) Scopes(name ...string) func(tx *gorm.DB) *gorm.DB {
+	return func(tx *gorm.DB) *gorm.DB {
+		return tx.Where(idWhere(name...)+" = ?", g.ID)
+	}
+}
+
+func (g GetByUUID) Scopes(name ...string) func(tx *gorm.DB) *gorm.DB {
+	return func(tx *gorm.DB) *gorm.DB {
+		return tx.Where(idWhere(name...)+" = ?", g.ID)
+	}
+}
+
+func (g GetByIDs) Scopes(name ...string) func(tx *gorm.DB) *gorm.DB {
+	return func(tx *gorm.DB) *gorm.DB {
+		return tx.Where(idWhere(name...)+" in ?", g.IDs)
+	}
+}
+
+func (g GetBySnowFlakeIDs) Scopes(name ...string) func(tx *gorm.DB) *gorm.DB {
+	return func(tx *gorm.DB) *gorm.DB {
+		return tx.Where(idWhere(name...)+" in ?", g.IDs)
+	}
+}
+
+func (g GetByUUIDs) Scopes(name ...string) func(tx *gorm.DB) *gorm.DB {
+	return func(tx *gorm.DB) *gorm.DB {
+		return tx.Where(idWhere(name...)+" in ?", g.IDs)
+	}
+}
+
+// idWhere
+//  Author: Kevin·CC
+//  Description: id过滤
+//  Param name
+//  Return string
+func idWhere(name ...string) string {
+	if len(name) > 0 {
+		return name[0]
+	}
+	return "id"
+}

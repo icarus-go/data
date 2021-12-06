@@ -1,6 +1,8 @@
 package params
 
-import "strings"
+import (
+	"strings"
+)
 
 type Cos struct {
 	Fields []string      `json:"fields" form:"fields"`
