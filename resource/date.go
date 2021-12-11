@@ -107,7 +107,7 @@ func (d *Date) ToDatetime() *Datetime {
 
 // MarshalJSON 序列化
 // Author SliverHorn
-func (d *Date) MarshalJSON() ([]byte, error) {
+func (d Date) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, d.Time.Format("2006-01-02"))), nil
 }
 
