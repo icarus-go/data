@@ -89,8 +89,9 @@ func (d Datetime) Value() (driver.Value, error) {
 //  Author: Kevin·CC
 //  return []byte 字节码
 //  return error 错误信息
-func (d *Datetime) MarshalJSON() ([]byte, error) {
-	return []byte(d.Time.Format(`"2006-01-02 15:04:05"`)), nil
+func (d Datetime) MarshalJSON() ([]byte, error) {
+	value := d.Time.Format(dateTimeFormat)
+	return []byte(value), nil
 }
 
 // UnmarshalJSON 反序列化
