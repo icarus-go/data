@@ -91,7 +91,7 @@ func (d Datetime) Value() (driver.Value, error) {
 //  return error 错误信息
 func (d Datetime) MarshalJSON() ([]byte, error) {
 	value := d.Time.Format(dateTimeFormat)
-	return []byte(value), nil
+	return []byte(fmt.Sprintf(`"%s"`, value)), nil
 }
 
 // UnmarshalJSON 反序列化
