@@ -30,7 +30,7 @@ func (s Strings) IndexOf(subString string) int {
 
 // Array
 //  Author: Kevin·CC
-//  Description: gorm无法识别
+//  Description: 由于 value 和 数据类型不匹配,所以必须通过强行声明类型来告诉gorm,这是一个字符串切片 (主要针对查询场景)
 //  Return []string
 func (s Strings) Array() []string {
 	return []string(s)
