@@ -28,6 +28,14 @@ func (s Strings) IndexOf(subString string) int {
 	return strings.Index(s.String(), subString)
 }
 
+// Array
+//  Author: Kevin·CC
+//  Description: gorm无法识别
+//  Return []string
+func (s Strings) Array() []string {
+	return []string(s)
+}
+
 //In
 //  Author: Kevin·CC
 //  Description: 是否包含元素
