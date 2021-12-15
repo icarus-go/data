@@ -111,13 +111,13 @@ func (d Datetime) MarshalJSON() ([]byte, error) {
 //  return error 错误信息
 func (d *Datetime) UnmarshalJSON(b []byte) error {
 	if string(b) > `""` {
-		if _time, err := time.ParseInLocation(dateTimeFormat, string(b), time.Local); err != nil {
+		_time, err := time.ParseInLocation(`"2006-01-02 15:04:05"`, string(b), time.Local) // 为什么这里不使用上面的dateTimeFormat呢? 原因是避免字符串拼接,在大数据的情况下性能过低的问题
+		if err != nil {
 			zap.L().Error("时间转换失败!", zap.String("datetime", string(b)))
 			return err
-		} else {
-			*d = Datetime{Time: _time}
-			return nil
 		}
+		*d = Datetime{Time: _time}
+		return nil
 	}
 	return nil
 }
