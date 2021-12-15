@@ -17,7 +17,7 @@ type Date struct {
 // NewDate 构建 Date 方法
 // Author SliverHorn
 func NewDate(value string) *Date {
-	_time, _ := time.Parse(dateFormat, value)
+	_time, _ := time.ParseInLocation(dateFormat, value, time.Local)
 	return &Date{Time: _time}
 }
 
@@ -30,7 +30,7 @@ func NewDateByTime(t time.Time) *Date {
 // NewDateByLayout 构建 Date by layout
 // Author SliverHorn
 func NewDateByLayout(layout, value string) *Date {
-	_time, _ := time.Parse(layout, value)
+	_time, _ := time.ParseInLocation(layout, value, time.Local)
 	return &Date{Time: _time}
 }
 
@@ -115,7 +115,7 @@ func (d Date) MarshalJSON() ([]byte, error) {
 // Author SliverHorn
 func (d *Date) UnmarshalJSON(b []byte) error {
 	if string(b) > `""` {
-		if _time, err := time.Parse(`"2006-01-02"`, string(b)); err != nil {
+		if _time, err := time.ParseInLocation(`"2006-01-02"`, string(b), time.Local); err != nil {
 			zap.L().Error("Date 时间转换失败!", zap.String("date", string(b)))
 			return err
 		} else {

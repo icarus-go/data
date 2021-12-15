@@ -20,8 +20,18 @@ type Datetime struct {
 //  Param: value
 //  return *Datetime
 func NewDatetime(value string) *Datetime {
-	_time, _ := time.Parse(dateTimeFormat, value)
+	_time, _ := time.ParseInLocation(dateTimeFormat, value, time.Local)
 	return &Datetime{Time: _time}
+}
+
+// Now
+//  Author: Kevin·CC
+//  Description: 当前时间
+//  Return *Datetime
+func Now() *Datetime {
+	return &Datetime{
+		Time: time.Now(),
+	}
 }
 
 // NewDatetimeByTime 通过 time.Time 构建 Datetime
@@ -40,7 +50,7 @@ func NewDatetimeByTime(t time.Time) *Datetime {
 //  Param: value
 //  return *Datetime
 func NewDatetimeByLayout(layout, value string) *Datetime {
-	_time, _ := time.Parse(layout, value)
+	_time, _ := time.ParseInLocation(layout, value, time.Local)
 	_d := &Datetime{Time: _time}
 	return _d
 }
@@ -101,7 +111,7 @@ func (d Datetime) MarshalJSON() ([]byte, error) {
 //  return error 错误信息
 func (d *Datetime) UnmarshalJSON(b []byte) error {
 	if string(b) > `""` {
-		if _time, err := time.Parse(`"2006-01-02 15:04:05"`, string(b)); err != nil {
+		if _time, err := time.ParseInLocation(dateTimeFormat, string(b), time.Local); err != nil {
 			zap.L().Error("时间转换失败!", zap.String("datetime", string(b)))
 			return err
 		} else {
