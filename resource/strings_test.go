@@ -65,3 +65,8 @@ func TestStrings_OrIn(t *testing.T) {
 	}
 
 }
+
+func Test_goto(t *testing.T) {
+	//var c := [1,2,3,4,5,6]
+	//for i:= 0;
+}
