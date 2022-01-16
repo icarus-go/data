@@ -36,6 +36,58 @@ func (s Strings) Array() []string {
 	return []string(s)
 }
 
+// Union 求并集
+func (s *Strings) Union(elements ...string) Strings {
+	m := make(map[string]struct{})
+
+	for _, v := range *s {
+		m[v] = struct{}{}
+	}
+
+	for _, v := range elements {
+		if _, ok := m[v]; !ok {
+			*s = append(*s, v)
+		}
+	}
+
+	return *s
+}
+
+//Intersection 交集
+func (s *Strings) Intersection(elements ...string) Strings {
+	m := make(map[string]struct{})
+
+	nn := make([]string, 0)
+
+	for _, v := range s.Array() {
+		m[v] = struct{}{}
+	}
+
+	for _, v := range elements {
+		if _, ok := m[v]; ok {
+			nn = append(nn, v)
+		}
+	}
+	return nn
+}
+
+// DifferenceSet 求差集 slice1-并集
+func (s *Strings) DifferenceSet(elements ...string) Strings {
+	m := make(map[string]int)
+	nn := make([]string, 0)
+	inter := s.Intersection(elements...)
+	for _, v := range inter {
+		m[v]++
+	}
+	for _, value := range s.Array() {
+		times, _ := m[value]
+		if times == 0 {
+			nn = append(nn, value)
+		}
+	}
+	return nn
+}
+
 //In
 //  Author: Kevin·CC
 //  Description: 是否包含元素

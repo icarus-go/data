@@ -1,6 +1,7 @@
 package resource
 
 import (
+	"fmt"
 	"pmo-test4.yz-intelligence.com/kit/data/json"
 	"testing"
 )
@@ -67,6 +68,45 @@ func TestStrings_OrIn(t *testing.T) {
 }
 
 func Test_goto(t *testing.T) {
-	//var c := [1,2,3,4,5,6]
-	//for i:= 0;
+	idCard := "440508199606192918"
+	println(string(idCard[17]))
+}
+
+func Test_has_value_Union(t *testing.T) {
+	strings := NewStrings("1", "2", "3")
+
+	union := strings.Union("3", "4", "5", "6")
+
+	fmt.Printf("%v", union.Array())
+}
+
+func Test_not_value_Union(t *testing.T) {
+	strings := NewStrings()
+
+	union := strings.Union("3", "4", "5", "6")
+
+	fmt.Printf("%v", union.Array())
+}
+
+func Test_has_value_intersection(t *testing.T) {
+	strings := NewStrings([]string{"1", "2", "3", "4"}...)
+
+	intersection := strings.Intersection("1", "4", "5")
+	fmt.Printf("%v", intersection.Array())
+}
+
+func Test_not_value_intersection(t *testing.T) {
+	strings := NewStrings()
+
+	intersection := strings.Intersection("1", "4", "5")
+
+	fmt.Printf("%v", intersection.Array())
+}
+
+func Test_has_value_difference(t *testing.T) {
+	strings := NewStrings("1", "2", "3", "4")
+
+	difference := strings.DifferenceSet("5", "4", "3", "1")
+
+	fmt.Printf("%v", difference.Array())
 }

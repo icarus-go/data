@@ -23,3 +23,16 @@ func NewDefaultPreload(field string) *Preload {
 		Field: field,
 	}
 }
+
+// NewPreloads
+//  Author: Kevin·Cai
+//  Description: 新建Preloads
+//  Param fields 字段组
+//  Return entities 实体
+func NewPreloads(fields ...string) (entities []*Preload) {
+	entities = make([]*Preload, 0, len(fields))
+	for _, field := range fields {
+		entities = append(entities, NewDefaultPreload(field))
+	}
+	return
+}

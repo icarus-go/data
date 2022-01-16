@@ -40,3 +40,15 @@ func NewRelation(relation string) RestrictPreload {
 		Object: relation,
 	}
 }
+
+// NewRelations
+//  Author: Kevin·Cai
+//  Description: 无条件加载关系
+//  Param relations 关系列表
+//  Return entities 关系预加载列表
+func NewRelations(relations ...string) (entities []RestrictPreload) {
+	for _, relation := range relations {
+		entities = append(entities, NewRelation(relation))
+	}
+	return
+}
