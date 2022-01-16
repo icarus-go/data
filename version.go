@@ -1,3 +1,3 @@
 package resource
 
-const VERSION = "v0.0.24"
+const VERSION = "v0.0.25"
