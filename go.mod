@@ -1,4 +1,4 @@
-module pmo-test4.yz-intelligence.com/kit/data
+module github.com/icarus-go/data
 
 go 1.16
 

@@ -1,6 +1,6 @@
 package params
 
-import "pmo-test4.yz-intelligence.com/kit/data/resource"
+import "github.com/icarus-go/data/resource"
 
 //DatetimeRange
 //  Author: Kevin·CC

@@ -1,8 +1,8 @@
 package params
 
 import (
+	"github.com/icarus-go/data/resource"
 	"gorm.io/gorm"
-	"pmo-test4.yz-intelligence.com/kit/data/resource"
 )
 
 //IWhere

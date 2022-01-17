@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"database/sql/driver"
 	"fmt"
-	"pmo-test4.yz-intelligence.com/kit/data/json"
+	"github.com/icarus-go/data/json"
 	"strings"
 )
 

@@ -1,7 +1,7 @@
 package resource
 
 import (
-	"pmo-test4.yz-intelligence.com/kit/data/json"
+	"github.com/icarus-go/data/json"
 	"testing"
 )
 

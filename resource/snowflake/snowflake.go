@@ -1,7 +1,7 @@
 package snowflake
 
 import (
-	"pmo-test4.yz-intelligence.com/kit/data/resource/snowflake/sony"
+	"github.com/icarus-go/data/resource/snowflake/sony"
 )
 
 func init() {

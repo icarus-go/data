@@ -1,6 +1,6 @@
 package result
 
-import "pmo-test4.yz-intelligence.com/kit/data/result/constant"
+import "github.com/icarus-go/data/result/constant"
 
 type ApiResult struct {
 	Code   constant.ResponseType  `json:"code" swaggertype:"integer"` //  Code 错误码 , {"0":"成功"}
